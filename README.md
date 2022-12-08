@@ -2,6 +2,11 @@
 
 A Quasar Project
 
+## Clone repository for getting JWT and run it 
+```bash
+git clone git@github.com:IceStormy1/Authorization-API.git
+```
+
 ## Install the dependencies
 ```bash
 yarn

@@ -4,10 +4,8 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      {
-        path: '',
-        redirect: 'login'
-      }
+      { path: '', component: () => import('pages/IndexPage.vue') },
+      //{ path: '/admin', component: () => import('pages/admin/Index'), meta: { requireLogin: true } }
     ]
   },
 

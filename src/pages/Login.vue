@@ -44,6 +44,7 @@
 
 <script>
 import { useQuasar } from 'quasar'
+import { mapActions } from 'vuex'
 
 let $q;
 
@@ -53,20 +54,22 @@ export default {
   {
     return {
       login: {
-        username: "",
-        password: ""
+        username: "Misha",
+        password: "123456"
       }
     };
   },
   methods:
   {
-      submitForm()
+    ...mapActions('auth', ['doLogin']),
+
+      async submitForm()
       {
         if(!this.login.username || !this.login.password)
         {
           $q.notify({
             type: 'negative',
-            message: 'Некорректный логин или пароль'
+            message: 'Логин или пароль обязательны для заполнения'
           })
         }
         else if(this.login.password.length < 6)
@@ -78,10 +81,21 @@ export default {
         }
         else
         {
-          $q.notify({
-            type: 'positive',
-            message: 'Успешная авторизация'
-          })
+          try
+          {
+            await this.doLogin(this.login);
+            await this.$router.push('/')
+          }
+          catch (error)
+          {
+            console.log(error);
+            $q.notify({
+              type: 'negative',
+              message: error.response.data.value
+                ? error.response.data.value
+                : 'Произошла непредвиденная ошибка!'
+            })
+          }
         }
       }
   },

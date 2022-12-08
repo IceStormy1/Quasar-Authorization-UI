@@ -1,4 +1,4 @@
-# auth (auth)
+# Quasar authorization
 
 A Quasar Project
 
